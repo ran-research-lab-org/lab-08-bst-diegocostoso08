@@ -1,3 +1,8 @@
+// Diego A. Costoso Vázquez - 801199097
+// CCOM 3034 - Data Structures
+// Lab 08 - Breadth-first traversal of binary tree
+
+
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 #include "BinarySearchTree.hpp"
 #include "doctest.h"
