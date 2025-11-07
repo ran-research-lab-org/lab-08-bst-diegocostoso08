@@ -1,3 +1,7 @@
+// Diego A. Costoso Vázquez - 801199097
+// CCOM 3034 - Data Structures
+// Lab 08 - Breadth-first traversal of binary tree
+
 #ifndef BINARY_SEARCH_TREE_H
 #define BINARY_SEARCH_TREE_H
 
@@ -5,6 +9,7 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
+#include <queue>
 using namespace std;
 
 template <typename T> string toStr(const T &value) {
@@ -111,10 +116,37 @@ public:
   // Remove x from the tree. Nothing is done if x is not found.
   void remove(const Comparable &x) { remove(x, root); }
 
+  
+  // BFT funciton assignment 
   string BFT() const {
-    string st;
-    return st;
-  }
+
+    if (isEmpty()) return "[]";
+
+    string bracket = "["; queue<BinaryNode*> st;
+    st.push(root);
+
+    while (!st.empty()) {
+
+        int level = st.size(); bracket += "["; // look for size level and declare bracket opening
+
+        for (int i = 0; i < level; ++i) { // initialize loop to distribute nodes in each level
+
+            BinaryNode* node = st.front(); 
+            st.pop();
+            bracket += toStr(node->element);
+
+            if (i < level - 1) {bracket += ",";}  // separate nodes that are in the same level
+            if (node->left){st.push(node->left);}
+            if (node->right){st.push(node->right);}
+        }
+
+        bracket += "]"; // Close bracket string for nodes 
+        if (!st.empty()) {bracket += ",";}  // Separate levels of the binary tree
+    }
+
+    bracket += "]"; // Close tree with bracket 
+    return bracket; // return result of tree 
+}
 
 private:
   struct BinaryNode {
